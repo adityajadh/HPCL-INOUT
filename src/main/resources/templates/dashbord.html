@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style>
+        .card {
+            box-shadow: 2px 2px 2px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            padding: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container mt-5 ms-4">
+			         
+			          <form th:action="@{/resetcount}" method="post"  onsubmit="return confirmReset();" style="display: flex; justify-content: end;">
+						    <input type="text" name="reset" class="form-control w-25 resetCount me-3" placeholder="Reset Count">
+						    <button class="btn btn-success form-control  w-25 me-3" type="submit" >
+						        <i class="fas fa-sync"></i> Reset
+						    </button>
+					  </form>
+					   <script>
+						    function confirmReset() {
+						        return confirm("Are you sure you want to reset the dashboard?");
+						    }
+						</script>
+
+            <!-- Total In Count - Main Gate -->
+            <h4>TOTAL IN COUNT <span class="badge" style="color:white; background-color:#007bff;">Main Gate</span></h4>
+
+            <div class="row d-flex mx-auto">
+                <!-- Card 1 - OPERATION -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+									    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									        <a href="maingateOperation" style="text-decoration: none; color: red;">OPERATION</a>
+									    </div>
+									    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									       <span id="operation_staff" th:text="${totalInscanRecordCountForOperation}">0</span>
+									    </div>
+								</div>
+                            	<div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-calendar fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 - DRIVER -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href="maingateDriver" style="text-decoration: none; color: blue;">DRIVER</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="driver_staff" th:text="${totalInscanRecordCount}">0</span>
+									</div>
+
+							   </div>
+                                <div class="col-auto" style="margin-top: -1px;">
+                                    <i class="fas fa-truck fa-lg text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 - PROJECT -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href="maingeteProject" style="text-decoration: none; color: yellow;">PROJECT</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									  <span id="project_staff" th:text="${totalInscanRecordCountForProject}">0</span> 
+									</div>
+								</div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-id-card fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 - VISITOR -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href="maingeteVisitor" style="text-decoration: none; color: green;">VISITOR</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="visitor" th:text="${totalInscanRecordCountForVisitor}">0</span>
+									</div>
+
+                                </div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-users fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 - TOTAL -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+								    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+								        <a href=" " style="text-decoration: none; color: red;">TOTAL</a>
+								    </div>
+								    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+								        <span id="total">0</span>
+								    </div>
+								</div>
+
+                                <div class="col-auto" style="margin-top: -17px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        <!-- Repeat the same structure for License Area -->
+<!-- TOTAL IN COUNT - License Area -->
+<h4>TOTAL IN COUNT <span class="badge" style="color:white; background-color:#dc3545;">License Area</span></h4>
+
+<div class="row d-flex mx-auto">
+    <!-- Card 1 - OPERATION -->
+     <!-- Card 1 - OPERATION -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+									    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									        <a href=" " style="text-decoration: none; color: red;">OPERATION</a>
+									    </div>
+									    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									        <span id="license_operation_staff" th:text="${totalLicenseGateRecordCountForOperation}">0</span>
+									    </div>
+								</div>
+                            	<div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-calendar fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 - DRIVER -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: blue;">DRIVER</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="license_driver_staff" th:text="${totalLicenseGateRecordCount}">0</span>
+									</div>
+							   </div>
+                                <div class="col-auto" style="margin-top: -1px;">
+                                    <i class="fas fa-truck fa-lg text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 - PROJECT -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: yellow;">PROJECT</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="license_project_staff" th:text="${totalLicenseGateRecordCountForProject}">0</span>
+									</div>
+								</div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-id-card fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 - VISITOR -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: green;">VISITOR</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="license_visitor_staff" th:text="${totalLicenseGateRecordCountForVisitor}">0</span>
+									</div>
+
+                                </div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-users fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 - TOTAL -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+								    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+								        <a href=" " style="text-decoration: none; color: red;">TOTAL</a>
+								    </div>
+								    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+								        <span id="license_total">0</span>
+								    </div>
+								</div>
+
+                                <div class="col-auto" style="margin-top: -17px;"></div>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</div>
+
+<!-- TOTAL IN COUNT - De-License Area -->
+<h4>TOTAL IN COUNT <span class="badge" style="color:white; background-color:#28a745;">De-License Area</span></h4>
+
+<div class="row d-flex mx-auto">
+     <!-- Card 1 - OPERATION -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+									    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									        <a href=" " style="text-decoration: none; color: red;">OPERATION</a>
+									    </div>
+									    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									        <span id="delicenseoperation">0</span>
+									    </div>
+								</div>
+                            	<div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-calendar fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 - DRIVER -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                   <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: blue;">DRIVER</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="delicensedriver">0</span>
+									</div>
+							   </div>
+                                <div class="col-auto" style="margin-top: -1px;">
+                                    <i class="fas fa-truck fa-lg text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 - PROJECT -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: yellow;">PROJECT</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="delicenseproject">0</span>
+									</div>
+								</div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-id-card fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 - VISITOR -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: green;">VISITOR</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+									    <span id="delicensevisitor" >0</span>
+									</div>
+
+                                </div>
+                                <div class="col-auto" style="margin-top: -17px;">
+                                    <i class="fas fa-users fa-lg text-gray-900"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 - TOTAL -->
+                <div class="col-xl-2 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+								    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+								        <a href=" " style="text-decoration: none; color: red;">TOTAL</a>
+								    </div>
+								    <div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">
+								        <span id="delicense_total">0</span>
+								    </div>
+								</div>
+
+                                <div class="col-auto" style="margin-top: -17px;"></div>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</div>
+
+        <!-- Repeat the same structure for De-License Area -->
+
+        <!-- Total Staff -->
+        <h4>TOTAL STAFF <span class="badge" style="color:white; background-color:#007bff;">Total Staff</span></h4>
+        <div class="row d-flex mx-auto">
+            <!-- Card 1 - OPERATION -->
+            <div class="col-xl-3 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+									<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									     <a href="" style="text-decoration: none; color: red;">OPERATION</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;"><span th:text="${totalOperationRecordCount}"></span></div>
+                            </div>
+                            <div class="col-auto" style="margin-top: -17px;">
+                                <i class="fas fa-calendar fa-lg text-gray-900"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 - DRIVER -->
+            <div class="col-xl-3 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: blue;">DRIVER</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">									
+									<span th:text="${totalDriverRecordCount}"></span></div>
+                            </div>
+                            <div class="col-auto" style="margin-top: -17px;">
+                                <i class="fas fa-truck fa-lg text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 - PROJECT -->
+            <div class="col-xl-3 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                               <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: yellow;">PROJECT</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">									
+									<span th:text="${totalProjectRecordCount}"></span></div>
+                            </div>
+                            <div class="col-auto" style="margin-top: -17px;">
+                                <i class="fas fa-id-card fa-lg text-gray-900"></i>
+                            </div>
+                        </div>
+                    </div>			
+                </div>
+            </div>
+            <!-- Card 4 - VISITOR -->
+            <div class="col-xl-3 col-md-6 mb-4 ml-3" onclick="jump('Operation','main','all')">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									    <a href=" " style="text-decoration: none; color: green;">VISITOR</a>
+									</div>
+									<div class="h5 mb-0 font-weight-bolder text-gray-900" style="font-weight: bolder; font-size: 30px;">									
+									<span id="visitor_staff" th:text="${totalVisitorRecordCount}" >0</span></div>
+	                            </div>
+	                            <div class="col-auto" style="margin-top: -17px;">
+                                <i class="fas fa-users fa-lg text-gray-900"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        // Get the values from the spans and convert them to integers
+        var operationStaffCount = parseInt($("#operation_staff").text());
+        var driverStaffCount = parseInt($("#driver_staff").text());
+        var project_staff = parseInt($("#project_staff").text());
+		var visitor_staff = parseInt($("#visitor").text());
+        // Calculate the total
+        var total = operationStaffCount + driverStaffCount + project_staff + visitor_staff;
+
+        // Display the total in the "total" span
+        $("#total").text(total);
+   
+    
+     
+        // Get the values from the spans and convert them to integers
+        var licenseoperationStaffCount = parseInt($("#license_operation_staff").text());
+        var licensedriverStaffCount = parseInt($("#license_driver_staff").text());
+        var licenseproject_staff = parseInt($("#license_project_staff").text());
+        var licensevisitor_staff = parseInt($("#license_visitor_staff").text());
+
+        // Calculate the total
+        var license_total = licenseoperationStaffCount + licensedriverStaffCount + licenseproject_staff + licensevisitor_staff ;
+
+        // Display the total in the "total" span
+        $("#license_total").text(license_total);
+        
+        
+         
+         
+         var delicenseoperation = operationStaffCount - licenseoperationStaffCount;
+        $("#delicenseoperation").text(delicenseoperation);
+        
+        var delicensedriver = driverStaffCount - licensedriverStaffCount;
+        $("#delicensedriver").text(delicensedriver);
+     
+       var delicenseproject = project_staff - licenseproject_staff;
+        $("#delicenseproject").text(delicenseproject);
+        
+        var delicensevisitor = visitor_staff - licensevisitor_staff;
+        $("#delicensevisitor").text(delicensevisitor);
+
+        // Calculate the total
+        var delicense_total = delicenseoperation + delicensedriver + delicenseproject + delicensevisitor ;
+
+        // Display the total in the "total" span
+        $("#delicense_total").text(delicense_total);
+    });
+</script>

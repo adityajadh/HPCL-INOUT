@@ -1,0 +1,506 @@
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:fragment="Layout(content)">
+ <head>
+ <meta charset="ISO-8859-1">
+<title>HPCL In-Out</title>
+  <link rel="icon" th:href="@{/img/Hindustan.png}" type="image/png">
+  
+<style>
+    body {
+		
+        font-family: 'Poppins', sans-serif;
+        background: #fafafa;
+    }
+     .wrapper {
+		 overflow-y: auto;
+        margin-right:15px;
+        display: flex;
+        width: 100%;
+    }
+    
+
+    .logo {
+        background-color: #f1f1f1;
+        width: 260px;
+        margin-left: -14px;
+        margin-right: 0px;
+
+    }
+
+    .logo img {
+        width: 250px;
+        margin-left: 5px;
+        margin-right: 30px;
+
+    }
+    
+    
+     #sidebar.btn:hover{
+    color: #fff;
+    transition: all 0.3s;
+    }
+    .line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+    }
+   
+     .wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    }
+
+	#sidebar {
+		
+			
+		    width: 280px;
+		    position: fixed;
+		    height:100vh;
+		    z-index: 999;
+		    min-width: 280px;
+    		max-width: 280px;
+    		background:  #6d7fcc;
+		    color: #fff;
+		    transition: all 0.3s;
+		    
+		}
+	 #sidebar.active {
+	    margin-left: -280px;
+	    }
+  
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #6d7fcc;
+    }
+     #sidebar .sidebar-manasvi {
+        padding: 15px;
+        background: #6d7fcc;
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+    }
+
+	 #sidebar ul p {
+	    color: #fff;
+	    padding: 10px;
+	    }
+
+    #sidebar ul li a {
+        
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+        color: white;
+        text-decoration: none;
+    
+    }
+
+    #sidebar ul li a:hover {
+        color: #3d260a;
+        background: #fff;
+        text-decoration: none;
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+        text-decoration: none;
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+        text-decoration: none;
+    }
+
+    .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        transition: all 0.3 ease-in-out;
+    }
+
+    ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: #6d7fcc;
+        color: white;
+    }
+/*=======================================================*/
+    ul.active {
+        padding: 20px;
+    }
+
+    ul.active {
+       border-radius: 5px ;
+       margin-bottom: 5px;
+       display: block;
+       text-align: center;  
+         
+    }
+     
+     .content{
+    width: 100%;
+    padding: 10px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    
+      margin-left:300px;
+      margin-right:100px;
+      width:auto;
+     }
+   
+	
+.hidden {
+    width: 0;
+    display: none;
+}
+/* Button Styles */
+.hamburger-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    transition: transform 0.3s;
+}
+
+/* Hamburger Lines */
+.hamburger-line {
+    width: 30px;
+    height: 3px;
+    background-color: #333; /* Dark color for lines */
+    margin: 2px 0;
+    transition: background-color 0.3s;
+}
+
+/* Active State (for toggled button) */
+.hamburger-line.active {
+    background-color: #000; /* Light color for active lines */
+}
+
+/* Toggled Button Animation */
+.hamburger-btn.toggled {
+    transform: rotate(180deg);
+}
+.content {
+    padding: 10px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-left: 280px; /* Set the initial margin-left to match your sidebar width */
+    margin-right: 100px; /* Set the initial margin-right as needed */
+    width: 80%;
+    
+}
+
+
+.content #navbarHeading{
+	text-align:center;
+}
+
+#sidebar.active + .content {
+    margin-left: 0; /* Adjust this value as needed */
+    margin-right: 0; /* Adjust this value as needed */
+    width: 100%; /* Expand content to full width when the sidebar is hidden */
+    transition: all 0.3s;
+}
+
+
+
+</style>  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+ 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+		crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+<body>
+	
+    
+<div class="wrapper" >
+        <nav id="sidebar">		
+			 
+
+            <div class="sidebar-header">
+                <div class="logo"><a href="/"><img src="/img/logoHPCL.png" class="img-fluid" alt="HPCL Logo" style="max-width: 300px;"></a></div>
+			</div>
+			 <div id="datetime" class="text-center mt-3">
+            <span class="text-white;">NOW:</span>
+        </div>
+            <ul class="list-unstyled components font-weight">
+                <li  class="active">
+					 <div class="sidebar fs-5 mx-1">
+						 <ul class="nav flex-column" id="nav_accordion">
+		                    <li id="dashboardMenuItem" style="color:white;">
+		                    <a href="/"><i class="fas fa-home"></i> Dashboard</a>
+		                </li>
+		                <li id="inventoryStructureMenuItem"  th:if="${userRole != 'security'}">
+		                    <a href="#inventory_structure" data-toggle="collapse" aria-expanded="false"
+		                        class="dropdown-toggle"><i class="fas fa-users"></i> Operation</a>
+		                    <ul class="collapse list-unstyled submenu" id="inventory_structure">
+		                        <li>
+		                            <a href="officer">Officer</a>
+		                        </li>
+		
+		                        <li>
+		                            <a href="employeecreate">Employee</a>
+		                        </li>
+		                        <li>
+		                            <a href="contractor">Contractor</a>
+		                        </li>
+		                        <li>
+		                            <a href="contractorworkman">Contractor Workman</a>
+		                        </li>
+		                        <li>
+		                            <a href="gat">Gat</a>
+		                        </li>
+		                        <li>
+		                            <a href="tat">Tat</a>
+		                        </li>
+		                        <li>
+		                            <a href="feg">Feg</a>
+		                        </li>
+		                        <li>
+		                            <a href="sec">Sec</a>
+		                        </li>
+		                    </ul>
+		                </li>
+		                <li id="productmasterMenuItem"  th:if="${userRole != 'security'}">
+		                    <a href="#product" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+								<i class='fas fa-truck'></i> Driver</a>
+		                    <ul class="collapse list-unstyled submenu" id="product">
+		                        <li>
+		                            <a href="packed">Packed</a>
+		                        </li>
+		                       
+		                        <li>
+		                            <a href="bulk">Bulk</a>
+		                        </li>
+		                         <li>
+		                            <a href="transportor">Transporter</a>
+		                        </li>
+		                       
+		                    </ul>
+		                </li>
+		                <li id="projectMenuItem"  th:if="${userRole != 'security'}">
+						    <a href="#Project" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						        <i class="fas fa-id-card"></i> Project
+						    </a>
+						    <ul class="collapse list-unstyled submenu" id="Project">
+						        <li>
+						            <a href="workman">Workman</a>
+						        </li>
+						        <li>
+						            <a href="amc">Amc</a>
+						        </li>
+						    </ul>
+						</li>
+						
+						<li id="visitorMenuItem">
+						    <a href="#Visitor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						        <i class="fas fa-users"></i> Visitor</a>
+						    <ul class="collapse list-unstyled submenu" id="Visitor">
+						        <li>
+						            <a href="visitor">Visitor</a>
+						        </li>
+						    </ul>
+						</li>
+						
+						<li id="reportMenuItem">
+						    <a href="#Report" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						        <i class="fas fa-address-book"></i> Report
+						    </a>
+						    <ul class="collapse list-unstyled submenu" id="Report">
+						        <li>
+						            <a href="report">Advance Report</a>
+						        </li>
+						    </ul>
+						</li>
+
+		               
+		                
+		                <li id="settingsMenuItem">
+		                    <a href="#settings" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+		                            class="fas fa-cog"></i> Settings</a>
+		                    <ul class="collapse list-unstyled submenu" id="settings">
+		                       
+		                        <li>
+		                            <a href="setting">Setting</a>
+		                        </li>
+		                    </ul>
+		                </li>
+		            </ul>
+		        <div class="sidebar-manasvi">
+		        <div class="logo"><a href="/"><img src="/img/manasvilogo.jpg" class="img-fluid" alt="HPCL Logo" style="max-width: 200px; "></a></div>
+				</div>
+				<div class="mt-2" th:if="${onedayremain!=true}">
+						<p class="text-center text-danger"
+						   th:text="${remainingdays}+' Days Remaining For License to Expire !'"></p>
+					</div>
+					<div class="mt-4" th:if="${onedayremain==true}">
+						<p class="text-center text-danger" th:text="' Your License will expire tomorrow !'"></p>
+					</div>
+		         </nav>
+           </div>
+           
+      
+
+
+ <div class="content" id="abc">
+    <div class="container-fluid">
+<!--         <div class="container mb-1 ">Welcome <span sec:authentication="principal.username">User</span></div> -->      
+			 <div class="navbar text-center" style="box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);">
+			<button type="button" id="sidebarCollapse" class="btn ms-3 text-center my-auto" style="color: #6d7fcc;">
+            <i class="fa fa-navicon" style="font-size: 26px;"></i>
+        </button>
+            <a class="navbar-brand d-block" id="navbarHeading" style="font-weight: 900;color:black; margin: 0 auto;">HPCL INOUT</a>
+	            <p style="font-size: 18px; font-weight: bold; color: #3366cc; margin-top: 10px; margin-bottom: 10px; margin-right: 10px;">
+				    <span th:text="${username}"></span>
+				</p>
+            <!-- <p> <span th:text="${userRole}"></span>!</p>-->
+             <a th:href="@{/logout}" class="btn btn-danger me-3">Logout</a>
+        </div>
+    </div>
+   
+
+
+   
+       <div th:replace="${content}"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<!--    <script type="text/javascript" th:src="@{js/code.jquery.com_jquery-3.7.0.js}"></script>
+-->    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+ 
+
+ 
+     <script>
+  	  document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll(".nav.flex-column > li"); // Get all main menu items
+
+       	   menuItems.forEach(menuItem => {
+            menuItem.addEventListener("click", function () {
+                // Close other open menus
+                menuItems.forEach(item => {
+                    if (item !== menuItem && item.classList.contains("active")) {
+                        item.classList.remove("active");
+                        const submenu = item.querySelector(".submenu");
+                        if (submenu) {
+                            new bootstrap.Collapse(submenu).hide();
+                        }
+                    }
+                });
+
+                // Toggle the clicked menu
+                menuItem.classList.toggle("active");
+            });
+        });
+    });
+  </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $('#abc').toggleClass('expanded');
+
+            if ($('#abc').hasClass('expanded')) {
+                // When the content area is expanded, set its width to 100% with no margins
+                $('#abc').css('width', '100%');
+                $('#abc').css('margin-left', '0');
+                $('#abc').css('margin-right', '0');
+            } else {
+                // When the content area is not expanded, set its width to its original value (e.g., 80%)
+                $('#abc').css('width', ''); // Reset the width to its default (remove the 'width' property)
+                $('#abc').css('margin-left', '280px'); // Adjust this value as needed
+                $('#abc').css('margin-right', '100px'); // Adjust this value as needed
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get a reference to the navbar heading
+        var navbarHeading = document.getElementById("navbarHeading");
+
+        // Get the section name from localStorage (if it exists)
+        var sectionName = localStorage.getItem("sectionName");
+        
+        // If sectionName exists in localStorage, update the navbar heading
+        if (sectionName) {
+            navbarHeading.textContent = sectionName;
+        }
+
+        // Get a reference to the sidebar links
+        var sidebarLinks = document.querySelectorAll("#sidebar a");
+
+        // Add click event listeners to each sidebar link
+        sidebarLinks.forEach(function(link) {
+            link.addEventListener("click", function(event) {
+                // Get the section name from the link text
+                var sectionName = link.textContent.trim();
+                
+                // Update the navbar heading with the section name
+                navbarHeading.textContent = sectionName;
+
+                // Store the section name in localStorage
+                localStorage.setItem("sectionName", sectionName);
+
+                // Prevent the default link behavior to avoid page reloading
+                event.preventDefault();
+
+                // Navigate to the link's href after updating the heading
+                window.location.href = link.getAttribute("href");
+            });
+        });
+    });
+</script>
+<script>
+    function updateDateTime() {
+        const datetimeElement = document.getElementById("datetime");
+        const currentTime = new Date();
+        const options = {  year: 'numeric', month: 'numeric', day: 'numeric' };
+        const options2 = {   hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedDate = currentTime.toLocaleDateString('en-US', options);
+        const formattedTime = currentTime.toLocaleTimeString('en-US', options2);
+        const formattedDateTime = "NOW: " + formattedDate + " @ " + formattedTime;
+        datetimeElement.textContent = formattedDateTime;
+    }
+
+    // Update the date and time when the page loads
+    updateDateTime();
+
+    // Update the date and time every second (1000 milliseconds)
+    setInterval(updateDateTime, 1000);
+</script>
+
+
+
+
+
+
+</body>
+</html>	

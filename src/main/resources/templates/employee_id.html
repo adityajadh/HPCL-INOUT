@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<section >
+		<style>
+
+
+.info-item {
+    margin-bottom: 10px;
+    color:#999 /* Adjust the margin-bottom as needed */
+}
+
+        @media print {
+            .btn-print, #printButton, #backButton {
+                display: none;
+            }
+        }
+        
+</style>
+    <div class="container m-4 " style="box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.1);z-index:-1;" >
+    <div class="container mt-2 ms-2 mb-3" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);z-index:2;">
+           <div class="print-content" id="contentToPrint">
+            <div class="row align-items-center">
+			
+                <div class="col-md-2 pt-1">
+                   
+                        <a><img id="image2" src="/img/Hindustan.png" class="img-fluid" alt="HPCL Logo" style="max-width: 70px;"></a>
+                   
+                </div>
+                <div class="col-md-8">
+                    <p  id="hpcl" class="text-center" style="color:#999;font-size:20px;">
+                        Hindustan Petroleum Corporation Limited <br>
+                        Sinnar LPG Bottling Plant, G-6, M.I.D.C., Malegaon, Sinnar, Nashik- 422113.
+                    </p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+             <div id="nav1" class="container mt-1 ms-2" style="background-color: red;">
+			    <h2 class="text-center text-white" th:text="'OPR – EMP/HPNSK/' + ${selectedProduct.id}">OPR – CON/HPNSK/${selectedProduct.id}</h2>
+			</div>
+           <div class="row">
+    <div class="col-md-6 mb-5">
+        <div class="info-box">
+    <div class="info-item">
+        <span><b style="font-weight:900;font-size:18px;">Employee Name:</b></span>
+        <b style="font-weight:900;font-size:18px;"><span th:text="${selectedProduct.fullName}"></span></b>
+    </div>
+    <div class="info-item">
+        <span><b style="font-weight:900;font-size:18px;">Phone:</b></span>
+        <b style="font-weight:900;font-size:18px;"><span th:text="${selectedProduct.mobileNumber}"></span></b>
+    </div>
+    <div class="info-item">
+        <span><b style="font-weight:900;font-size:18px;">Address:</b></span>
+        <b style="font-weight:900;font-size:18px;"><span th:text="${selectedProduct.address}"></span></b>
+    </div>
+    <div class="info-item">
+        <span><b style="font-weight:900;font-size:18px;">Working as:</b></span>
+        <b style="font-weight:900;font-size:18px;"><span th:text="${selectedProduct.emp}"></span></b>
+    </div>
+</div>
+
+        <!-- Add any other rows you want to display here -->
+    </div>
+    <div class="col-md-6">
+    <img id="image1" th:src="@{/generateQRCode(data='EMP/HPNSK/' + ${selectedProduct.id})}"  class="ms-4" width="200" height="200" alt="QR Code" />
+	</div>
+
+</div>
+
+            <br>
+            <div id="sign1" class="row mx-0 mt-4 row-b text-center">
+                <div class="col-4">
+                    <h3> Sign & Seal of Contractor </h3>
+                </div>
+                <div id="sign2" class="col-4 col-b-1">
+                    <h3> Sign. / Thumb Impression of the pass holder </h3>
+                </div>
+                <div id="sign3"class="col-4 col-b-1">
+                    <h3> Attestation by HPCL Plant In charge </h3>
+                </div>
+            </div>
+             <div id="nav1" class="container mt-1 ms-2" style="background-color: red;">
+				<h2 class="text-center text-white"><span th:text="${selectedProduct.emp}"></span></h2>
+			</div>
+	
+    </div>
+    
+    		</div>
+			        <button id="printButton" class="btn btn-primary">Print Page</button>
+					<button id="backButton" onclick="window.history.back();" class="btn btn-primary">Back</button>
+        </div>
+  
+    
+    <script>
+       
+        document.getElementById('printButton').addEventListener('click', function () {
+            var contentToPrint = document.getElementById('contentToPrint').outerHTML;
+            var printWindow = window.open('', '', 'width=1000, height=800');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Print</title></head><body>');
+            // Add CSS styles for individual images by their IDs
+            printWindow.document.write('<style type="text/css">');
+			printWindow.document.write('#image2 { margin-left: 0px; margin-top: 0px; }');
+			printWindow.document.write('#hpcl { margin-left: 100px;margin-top: -80px;}');
+            printWindow.document.write('#image1 { margin-left: 500px; margin-top: -100px; }');
+           	printWindow.document.write('#sign1 { margin-left: 0px; margin-top: 0px; font-size: 12px; }');
+			printWindow.document.write('#sign2 { margin-left: 170px; margin-top: -30px; font-size: 12px; }');
+			printWindow.document.write('#sign3 { margin-left: 460px; margin-top: -30px;font-size: 12px; }'); 
+			printWindow.document.write('#nav1 { margin-left: 0px; margin-top: 0px; font-size: 12px; text-align: center; }');
+
+            printWindow.document.write('</style>');
+            printWindow.document.write(contentToPrint);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            // You can add a delay to ensure images load before printing
+            setTimeout(function () {
+                printWindow.print();
+                printWindow.close();
+            }, 1000); // Adjust the delay as needed
+        });
+    </script>
+
+</section>
+ 
+</body>
+</html>
