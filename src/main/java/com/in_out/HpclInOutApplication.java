@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HpclInOutApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HpclInOutApplication.class, args);;
+		SpringApplication.run(HpclInOutApplication.class, args);
 	}
 
 }
